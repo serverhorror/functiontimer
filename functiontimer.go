@@ -1,3 +1,5 @@
+// functiontimer is a naive approach to record the duration of your function
+// calls to a specified logger
 package functiontimer
 
 import (
