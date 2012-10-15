@@ -14,14 +14,14 @@ func TestTimer(t *testing.T) {
 	New(l)
 }
 
-func sleep3() {
-	defer RecordTime(time.Now())
+func sleep3(tmr *Timer) {
+	defer tmr.RecordTime(time.Now())
 	time.Sleep(3 * time.Second)
 }
 
 func TestLogger(t *testing.T) {
 	l := log.New(ioutil.Discard, "Test", log.LstdFlags)
-	New(l)
-	sleep3()
+	tmr := New(l)
+	sleep3(tmr)
 
 }

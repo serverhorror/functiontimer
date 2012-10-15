@@ -37,7 +37,7 @@ func New(l *log.Logger) *Timer {
 //		defer mytimer.RecordTime(time.Now())
 //		time.sleep(3 * Second)
 //	}
-func RecordTime(start time.Time) {
+func (t *Timer)RecordTime(start time.Time) {
 	pc, _, _, ok := runtime.Caller(0)
 	caller := runtime.FuncForPC(pc)
 	elapsed := time.Since(start)
