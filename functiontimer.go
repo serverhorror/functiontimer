@@ -38,14 +38,14 @@ func New(l *log.Logger) *Timer {
 //		time.sleep(3 * Second)
 //	}
 func (t *Timer)RecordTime(start time.Time) {
-	pc, _, _, ok := runtime.Caller(0)
+	pc, _, _, ok := runtime.Caller(1)
 	caller := runtime.FuncForPC(pc)
 	elapsed := time.Since(start)
 	if ok {
-		log.Printf("Function `%s` took `%s`",
+		t.l.Printf("Function `%s` took `%s`",
 			caller.Name(), elapsed)
 	} else {
-		log.Printf("UNKNOWN Function took `%s`", elapsed)
+		t.l.Printf("UNKNOWN Function took `%s`", elapsed)
 	}
 
 }
