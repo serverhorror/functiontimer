@@ -3,9 +3,9 @@ package functiontimer
 import (
 	"io/ioutil"
 	"log"
+	"os"
 	"testing"
-"time"
-"os"
+	"time"
 )
 
 func TestTimer(t *testing.T) {
@@ -15,7 +15,7 @@ func TestTimer(t *testing.T) {
 }
 
 func sleep3() {
-defer RecordTime(time.Now())
+	defer RecordTime(time.Now())
 	time.Sleep(3 * time.Second)
 }
 
@@ -24,5 +24,4 @@ func TestLogger(t *testing.T) {
 	New(l)
 	sleep3()
 
-	
 }
