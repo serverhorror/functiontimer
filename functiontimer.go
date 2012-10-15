@@ -19,6 +19,11 @@ func New(l *log.Logger) *Timer {
 	}
 }
 
+func Elapsed(start time.Time) time.Duration {
+	elapsed := time.Since(start)
+	return elapsed
+}
+
 // RecordTime should be used as a `defer`ed function at the beginning of a
 // function that you want to time.
 //
@@ -37,15 +42,19 @@ func New(l *log.Logger) *Timer {
 //		defer mytimer.RecordTime(time.Now())
 //		time.sleep(3 * Second)
 //	}
-func (t *Timer)RecordTime(start time.Time) {
+func (t *Timer) RecordTime(start time.Time) time.Duration {
 	pc, _, _, ok := runtime.Caller(1)
 	caller := runtime.FuncForPC(pc)
-	elapsed := time.Since(start)
+	elapsed := Elapsed(start)
 	if ok {
 		t.l.Printf("Function `%s` took `%s`",
 			caller.Name(), elapsed)
 	} else {
 		t.l.Printf("UNKNOWN Function took `%s`", elapsed)
 	}
+	return elapsed
 
 }
+
+// vim: set ts=4 sts=4 fenc=utf-8 syn=go noexpandtab :
+
